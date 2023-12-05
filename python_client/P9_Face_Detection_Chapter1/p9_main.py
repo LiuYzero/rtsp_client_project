@@ -1,4 +1,6 @@
 # -*-coding:utf-8 -*-
+# 单图像单face检测逻辑
+
 import cv2
 import numpy as np
 import face_recognition
@@ -13,7 +15,7 @@ imgElonTest = cv2.cvtColor(imgElonTest, cv2.COLOR_BGR2RGB)
 imgBillGates = face_recognition.load_image_file("ImagesBasic/BillGates.png")
 imgBillGates = cv2.cvtColor(imgBillGates, cv2.COLOR_BGR2RGB)
 
-# detection face
+# detection face  note: one picture one face
 face_location = face_recognition.face_locations(imgElon)[0]
 encode_elon = face_recognition.face_encodings(imgElon)[0]
 
@@ -40,7 +42,7 @@ distance_value = face_recognition.face_distance(known_encodes, encode_elon_test)
 print (distance_result)
 print (distance_value)
 
-# draw title
+# draw result
 cv2.putText(imgElonTest, ""+str(distance_result[0])+" "+str(round(distance_value[0],2)),
         (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 3)
 cv2.putText(imgBillGates, ""+str(distance_result[1])+" "+str(round(distance_value[1],2)),
